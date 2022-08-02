@@ -213,7 +213,7 @@ print(Final)
 import pickle
 from sklearn.ensemble import RandomForestRegressor
 
-Machine_learning_model=pickle.load(open('DIP_PUNE_RENT.pkl',"rb"))
+Machine_learning_model=pickle.load(open('Pune_Rent_App.pkl',"rb"))
 Random_Forest=Machine_learning_model[0].predict([Final])[0]
 print(round(Random_Forest,2))
 

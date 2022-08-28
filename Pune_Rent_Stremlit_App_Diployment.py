@@ -130,10 +130,11 @@ locality=['AWHO Hadapsar Colony', 'Adarsh Nagar Kiwale',
        'hingne Khurd', 'katraj kondhwa road', 'kesnand', 'maharshi nagar',
        'mandai', 'wadebolhai']
 
+st.image("https://thumbs.dreamstime.com/b/rent-house-shows-rental-lease-property-showing-38119226.jpg",width=80, use_column_width=40)
 Area=st.sidebar.number_input('Area in Sqft',value=0.00)
 st.write('Area=',Area,'Sqft')
 
-BedRooms=st.sidebar.selectbox('No of BedRooms',[1,2,3,4,5,6,7,8])
+BedRooms=st.sidebar.selectbox('No of BedRooms',[1,2,3,4])
 st.write('No of BedRooms=',BedRooms)
 
 Seller_Type_Cat=['BUILDER','OWNER']
@@ -153,7 +154,7 @@ for s in Seller_Type_Cat:
 #Property_Type_Encoding
 Property_Type_Cat=['Independent Floor','Independent House', 'Penthouse','Studio Apartment','Villa']
 
-Property_Type_select=st.sidebar.selectbox('Property_Type',Property_Type_Cat)
+Property_Type_select=st.sidebar.selectbox('Property_Type',['Independent Floor','Independent House', 'Penthouse','Studio Apartment','Villa'])
 st.write('Property_Type =',Property_Type_select)
 
 Property_Type_Encoding=[]
@@ -166,6 +167,7 @@ for p in Property_Type_Cat:
 
 
 Locality_select=st.sidebar.selectbox('Locality',locality)
+
 st.write('Locality =',Locality_select)
 # LOCALITY_ENCODING
 locality_encoding=[]
@@ -194,7 +196,7 @@ for F in furnish_type:
 Bathroom_encoding=[]
 Bathroom_Cat=['2 ','3 ', '4 ','5', '6 ', '8']
 
-No_of_Bathrooms_select=st.sidebar.selectbox('No.of Bathrooms',Bathroom_Cat)
+No_of_Bathrooms_select=st.sidebar.selectbox('No.of Bathrooms',['2 ','3 ', '4 '])
 st.write('No.of Bathrooms =',No_of_Bathrooms_select)
 
 
@@ -213,11 +215,12 @@ print(Final)
 import pickle
 from sklearn.ensemble import RandomForestRegressor
 
+
 Machine_learning_model=pickle.load(open('Pune_Rent_App.pkl',"rb"))
 Random_Forest=Machine_learning_model[0].predict([Final])[0]
-print(round(Random_Forest,2))
+#print(round(Random_Forest,2))
 
-st.write('__House Rent Will be Approximately:__',' #',round(Random_Forest,2),'Rs')
-st.success('Success')
-
+A=st.button('Click Here to Know Your House Rent')
+if (A==True):
+   st.write('# House Rent Will be Approximately:=',round(Random_Forest,2),'Rs')
 #print(len([Area]),len([BedRooms]),len(Seller_Type_Encoding),len(Property_Type_Encoding),len(locality_encoding),len(furnish_type_encoding),len(Bathroom_encoding))
